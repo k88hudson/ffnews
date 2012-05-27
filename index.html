@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>NewsCaster</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+</head>
+<body>
+<header>
+
+</header>
+<div id="main" role="main">
+	<canvas id="canvas" width="700" height="480"></canvas>
+	<div class="player">
+		<button id="player-play">Play</button>
+		<input id="player-range" type="range" style="width:600px;" min="0" max="25">
+	</div>
+	<div id="video-container">
+		<video id="video" controls>
+			<source src="media/newscast.ogv">
+		</video>
+		<div class="cube-view">
+		    <div class="cube blue">
+		        <div class="panel bottom"></div>
+		        <div class="panel top"></div>
+		        <div class="panel left"><h1>fox news</h1></div>
+		        <div class="panel right"><h1>fox news</h1></div>
+		        <div class="panel front"><h1>fox news</h1></div>
+		        <div class="panel back"><h1>fox news</h1></div>
+		    </div>
+		</div>​<!-- .cube-view -->
+	</div><!-- #video-container -->
+</div>
+
+
+<footer>
+
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+<script src="js/html5slider.js"></script>
+
+<script src="js/seriously.js"></script>
+<script src="js/effects/seriously.vignette.js"></script>
+<script src="js/effects/seriously.hue-saturation.js"></script>
+<script src="js/effects/seriously.chroma.js"></script>
+<script src="js/effects/seriously.split.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+	var p = Popcorn("#video"),
+			_playing = false;
+
+	p.on("loadedmetadata", function(){
+
+		
+		//Controls
+		var playbtn = document.getElementById("player-play"),
+				playrange = document.getElementById("player-range");
+
+		playbtn.addEventListener("click", function(){
+			if( _playing ) {
+				console.log("hello");
+				p.pause();
+				_playing = false;
+			} else {
+				p.play();
+				_playing = true;
+			}
+		}, false);
+
+		playrange.addEventListener("mousedown", function(){
+				p.off("timeupdate", updateRange);
+		}, false)
+
+		playrange.addEventListener("change", function(){
+			p.currentTime( parseFloat( playrange.value ) );
+		}, false);
+
+		playrange.addEventListener("mouseup", function(){
+			p.on("timeupdate", updateRange);
+		}, false)
+
+		p.on("timeupdate", updateRange);
+
+		function updateRange(){
+			playrange.value = p.currentTime();
+		}
+
+		p.cue(4, function(){
+			$("#video").animate({
+				width: "800px"
+			}, 1000);
+		});
+
+
+		
+		// declare our variables
+		var seriously, // the main object that holds the entire composition
+		    vid, // a wrapper object for our source image
+		    target,
+		    chroma; // a wrapper object for our target canvas
+
+		seriously = new Seriously();
+		vid = seriously.source('#video');
+		//vignette = seriously.effect('vignette');
+		//vignette.amount = 3;
+		chroma = seriously.effect('chroma');
+		//chroma.screen = 'rgb(19,17,13)';
+		chroma.weight = 4;
+		chroma.balance = 1;
+		chroma.clipWhite = .1;
+		chroma.clipBlack = .3;
+
+		// now do the same for the target canvas
+		target = seriously.target('#canvas');
+		chroma.source = vid;
+		target.source = chroma;
+
+		seriously.go();
+
+	}); //on loadedmetadata
+}, false);
+
+</script>
+<script src="js/script.js"></script>
+</body>
+</html>
