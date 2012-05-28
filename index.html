@@ -19,26 +19,27 @@
 
 </header>
 <div id="main" role="main">
-	<canvas id="canvas" width="700" height="480"></canvas>
-	<div class="player">
-		<button id="player-play">Play</button>
-		<input id="player-range" type="range" style="width:600px;" min="0" max="25">
-	</div>
 	<div id="video-container">
+		<div id="overlay">
+		</div>
 		<video id="video" controls>
 			<source src="media/newscast.ogv">
 		</video>
 		<div class="cube-view">
-		    <div class="cube blue">
+		    <div class="cube ff">
 		        <div class="panel bottom"></div>
 		        <div class="panel top"></div>
-		        <div class="panel left"><h1>fox news</h1></div>
-		        <div class="panel right"><h1>fox news</h1></div>
-		        <div class="panel front"><h1>fox news</h1></div>
-		        <div class="panel back"><h1>fox news</h1></div>
+		        <div class="panel left"><h1></h1></div>
+		        <div class="panel right"><h1</h1></div>
+		        <div class="panel front"><h1>mozilla news</h1></div>
+		        <div class="panel back"><h1>>mozilla news</h1></div>
 		    </div>
 		</div>​<!-- .cube-view -->
 	</div><!-- #video-container -->
+	<div class="player">
+		<button id="player-play">Play</button>
+		<input id="player-range" type="range" style="width:600px;" min="0" max="25" value="0">
+	</div>
 </div>
 
 
@@ -62,9 +63,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	var p = Popcorn("#video"),
 			_playing = false;
 
-	p.on("loadedmetadata", function(){
-
-		
 		//Controls
 		var playbtn = document.getElementById("player-play"),
 				playrange = document.getElementById("player-range");
@@ -98,39 +96,26 @@ document.addEventListener("DOMContentLoaded", function(){
 			playrange.value = p.currentTime();
 		}
 
-		p.cue(4, function(){
+		//EVENTS -------------
+		$("#video").css({
+			width: "700px"
+		});
+		p.cue(3.9, function(){
+			$("#overlay").fadeOut();
 			$("#video").animate({
-				width: "800px"
+				width: "700px",
+				left: "0"
 			}, 1000);
 		});
 
+		p.cue(4, function(){
+			$("#overlay").fadeIn();
+			$("#video").animate({
+				width: "600px",
+				left: "100px"
+			}, 1000);
+		});
 
-		
-		// declare our variables
-		var seriously, // the main object that holds the entire composition
-		    vid, // a wrapper object for our source image
-		    target,
-		    chroma; // a wrapper object for our target canvas
-
-		seriously = new Seriously();
-		vid = seriously.source('#video');
-		//vignette = seriously.effect('vignette');
-		//vignette.amount = 3;
-		chroma = seriously.effect('chroma');
-		//chroma.screen = 'rgb(19,17,13)';
-		chroma.weight = 4;
-		chroma.balance = 1;
-		chroma.clipWhite = .1;
-		chroma.clipBlack = .3;
-
-		// now do the same for the target canvas
-		target = seriously.target('#canvas');
-		chroma.source = vid;
-		target.source = chroma;
-
-		seriously.go();
-
-	}); //on loadedmetadata
 }, false);
 
 </script>
