@@ -134,14 +134,14 @@ $("a[href='#explore']").toggle(function(){
 
   var p = Popcorn("#video");
 
-  p.cue(4, function(){
+  p.cue(15, function(){
     $("#video-container").addClass("tiny");
     $(".bottom-container").animate({
       height: "500px"
     });
   });
 
-  p.cue(10, function(){
+  p.cue(20, function(){
     $("#video-container").removeClass("tiny");
     $(".bottom-container").animate({
       height: "145px"
@@ -156,9 +156,23 @@ $("a[href='#explore']").toggle(function(){
   });
 
    p.text({
-    start: 5,
-    end: 25,
+    start: 9,
+    end: 10,
     text: "HAdasdasdasdasdasdasd asd asd asd asd",
+    target: "target"
+  });
+
+  p.text({
+    start: 10,
+    end: 11,
+    text: "Hd asd asd",
+    target: "target"
+  });
+
+  p.text({
+    start: 11,
+    end: 12,
+    text: "345345fdsfsdfdsf HAdasdsd asd asd asd asd",
     target: "target"
   });
 
