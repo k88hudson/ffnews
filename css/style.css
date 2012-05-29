@@ -82,13 +82,24 @@ td { vertical-align: top; }
    src: local('☺'), url('http://www.mozilla.org/img/fonts/MetaWebPro-Bold.woff') format('woff');
    font-weight: bold;
 }
+html{
+ background: rgb(96,108,136);
+background: -moz-linear-gradient(-45deg,  rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%);
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1)));
+background: -webkit-linear-gradient(-45deg,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+background: -o-linear-gradient(-45deg,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+background: -ms-linear-gradient(-45deg,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+background: linear-gradient(-45deg,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=1 );
+height: 100%;
+}
+
 body {
-  background: #EEEEEE;
   font-family: "Helvetica Neue", sans-serif;
 }
 
 #main {
-  width: 900px;
+  width: 960px;
   height: 520px;
   margin: 40px auto;
   position: relative;
