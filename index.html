@@ -11,6 +11,8 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
 	<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
 	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
@@ -19,27 +21,82 @@
 
 </header>
 <div id="main" role="main">
-	<div id="video-container">
-		<div id="overlay">
+	<div class="left-container">
+		<div id="video-header"><h1>The News &ndash; Monday, May 28, 2012 <span class="logo">mozilla news</span></h1></div>
+		<div class="inner-container">
+			<div id="overlay"></div>
+			<video id="video" controls>
+				<source src="media/newscast.ogv">
+			</video>
+			<div id="corner-target"></div>
+			<div id="ticker">
+				<div><span>When Mozilla’s Open Badges project began in late 2010, it was little more than a demo.</span></div>
+			</div>
+			<div class="cube-view">
+			    <div class="cube orange">
+			        <div class="panel bottom"></div>
+			        <div class="panel top"></div>
+			        <div class="panel left"><h1>special report</h1></div>
+			        <div class="panel right"><h1>special report</h1></div>
+			        <div class="panel front"><h1>mozilla news</h1></div>
+			        <div class="panel back"><h1>mozilla news</h1></div>
+			    </div>
+			</div>​<!-- .cube-view -->
+		</div><!-- #video-container -->
+		<div class="player">
+			<a id="player-play" class="btn">Play</a>
+			<input id="player-range" type="range" style="width:400px;" min="0" max="25" value="0">
 		</div>
-		<video id="video" controls>
-			<source src="media/newscast.ogv">
-		</video>
-		<div class="cube-view">
-		    <div class="cube ff">
-		        <div class="panel bottom"></div>
-		        <div class="panel top"></div>
-		        <div class="panel left"><h1></h1></div>
-		        <div class="panel right"><h1</h1></div>
-		        <div class="panel front"><h1>mozilla news</h1></div>
-		        <div class="panel back"><h1>>mozilla news</h1></div>
-		    </div>
-		</div>​<!-- .cube-view -->
-	</div><!-- #video-container -->
-	<div class="player">
-		<button id="player-play">Play</button>
-		<input id="player-range" type="range" style="width:600px;" min="0" max="25" value="0">
-	</div>
+		<div class="bottom-tabs">
+			<ul>
+				<li><a href="#">student strikes</a></li>
+				<li><a href="#">baloney</a></li>
+				<li><a href="#">lemons</a></li>
+		</div>
+		<div class="bottom-container">
+
+			<h3>Student strike continues in Quebec</h3>
+			<h5>Jean Michel Duchamps &ndash; Montr&eacute;al Gazette</h5>
+				<p>QUEBEC – The provincial government intends to present a bill to end Quebec’s 14-week tuition strike, Premier Jean Charest announced Wednesday night – a proposal that was quickly and decisively rejected by student leaders.
+
+				<p>The bill calls for suspending the current academic session at 14 CEGEPs and 11 out of 18 universities where students remain out of classes unless an agreement can be reached.
+
+				<p>The winter session would resume in August and September.
+
+				<p>The bill would also guarantee that students who want to return to classes can.
+
+				<p>The specifics of the bill were not spelled out, respecting National Assembly protocol, which requires the government to first present bills in the assembly.
+
+				<p>Charest also said his April 27 proposal – to add $39 million in bursaries and to change student-aid rules so low-income students would not feel the impact of the $1,778 tuition increase over seven years – would come into force.
+
+				<p>The premier appealed to student and union leaders for calm, expressing the hope his new approach would lead to campus peace.</p>
+		</div>
+	</div><!--left-container -->
+	<div class="right-container">
+		<div class="widget now-playing">
+			<div class="widget-header">
+				<h3>Now playing <a href="#explore" class="btn btn-right btn-green">Explore</a></h3>
+			</div>
+			<div class="widget-body">
+				<h3>Student strike continues in Quebec</h3>
+				<p>Over the past several weeks, hundreds of thousands of Quebec students have taken to the streets to prevent a $1,625 increase in tuition fees. The protests probably irk many Ontarians, who have grown accustomed to paying the highest fees in the country.</p>
+			</div>
+			<div class="widget-links">
+				<a href="#" class="btn btn-full-width btn-green">Link: asdasda</a>
+				<a href="#" class="btn btn-full-width btn-green">Link: asdasda</a>
+			</div>
+		</div>
+		<div class="widget">
+			<div class="widget-header">
+				<h3>Coming up</h3>
+			</div>
+			<ul class="widget-list">
+				<li><a for="#5">Section 1</a></li>
+				<li><a for="#15">Section 2</a></li>
+				<li><a for="#20">Section 3</a></li>
+			</ul>
+		</div>
+	</div><!--right-container-->
 </div>
 
 
@@ -59,21 +116,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-
+	$("a[href='#explore']").click(function(e){
+		e.preventDefault();
+		$(".inner-container").addClass("tiny");
+		$(".bottom-container").show().animate({
+			height: "500px"
+		});
+	});
 	var p = Popcorn("#video"),
 			_playing = false;
 
-		//Controls
+		// CONTROLS ------------------------ */
 		var playbtn = document.getElementById("player-play"),
 				playrange = document.getElementById("player-range");
 
 		playbtn.addEventListener("click", function(){
 			if( _playing ) {
-				console.log("hello");
 				p.pause();
+				playbtn.innerHTML = "Play";
 				_playing = false;
 			} else {
 				p.play();
+				playbtn.innerHTML = "Pause";
 				_playing = true;
 			}
 		}, false);
@@ -91,30 +155,29 @@ document.addEventListener("DOMContentLoaded", function(){
 		}, false)
 
 		p.on("timeupdate", updateRange);
+		p.on("playing", function(){
+			if( _playing = true );
+		});
 
 		function updateRange(){
 			playrange.value = p.currentTime();
 		}
+		// ------------------------------- */
 
-		//EVENTS -------------
-		$("#video").css({
-			width: "700px"
-		});
-		p.cue(3.9, function(){
-			$("#overlay").fadeOut();
-			$("#video").animate({
-				width: "700px",
-				left: "0"
-			}, 1000);
-		});
+		//WIDGET TOC
+		var timeLinks = document.querySelectorAll(".widget-list li a");
 
-		p.cue(4, function(){
-			$("#overlay").fadeIn();
-			$("#video").animate({
-				width: "600px",
-				left: "100px"
-			}, 1000);
-		});
+		for( var i=0;i<timeLinks.length;i++ ){
+			(function(i){
+				timeLinks[i].addEventListener("click", function(e){
+					e.preventDefault();
+					var link = timeLinks[i].getAttribute("for").replace("#", "");
+					p.currentTime( link ).play();
+				},false);
+			}( i ));
+		}
+
+		
 
 }, false);
 
