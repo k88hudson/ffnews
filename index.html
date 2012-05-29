@@ -85,7 +85,7 @@
               </div>
               <div class="widget-body light">
                 <h3>Student strike continues in Quebec</h3>
-                <p>Over the past several weeks, hundreds of thousands of Quebec students have taken to the streets to prevent a $1,625 increase in tuition fees. The protests probably irk many Ontarians, who have grown accustomed to paying the highest fees in the country.</p>
+                <p id="target"></p>
               </div>
               <div class="widget-links">
                 <a href="#" class="btn btn-full-width btn-red">Link: asdasda</a>
@@ -118,11 +118,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 <script>
-$("a[href='#explore']").click(function(e){
-    e.preventDefault();
+$("a[href='#explore']").toggle(function(){
+    $(this).html("video");
     $("#video-container").addClass("tiny");
     $(".bottom-container").animate({
       height: "500px",
+    });
+  }, function(e){
+    $(this).html("explore");
+    $("#video-container").removeClass("tiny");
+    $(".bottom-container").animate({
+      height: "145px"
     });
   });
 
@@ -138,9 +144,31 @@ $("a[href='#explore']").click(function(e){
   p.cue(10, function(){
     $("#video-container").removeClass("tiny");
     $(".bottom-container").animate({
-      height: "245px"
+      height: "145px"
     });
   });
+
+  p.text({
+    start: 1,
+    end: 5,
+    text: "Over the past several weeks, hundreds of thousands of Quebec students have taken to the streets to prevent a $1,625 increase in tuition fees. The protests probably irk many Ontarians, who have grown accustomed to paying the highest fees in the country.",
+    target: "target"
+  });
+
+   p.text({
+    start: 5,
+    end: 25,
+    text: "HAdasdasdasdasdasdasd asd asd asd asd",
+    target: "target"
+  });
+
+   p.image({
+    start: 1,
+    end: 5,
+    src: "http://demotivationalblog.com/demotivational/2009/03/chuck-norris-he-approves-your-post.jpg",
+    target: "corner-target"
+   });
+
 
   
   //WIDGET TOC

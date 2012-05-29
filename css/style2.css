@@ -266,6 +266,10 @@ background: linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,.2) 100%), #C12631;
   height: 200px;
   z-index: 1000;
 }
+#corner-target img {
+  width: 100%;
+}
+
 #corner-target:hover {
   border: 1px solid blue;
 }
