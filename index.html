@@ -16,23 +16,24 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
 	<script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
-  <style>
-  .container_12 > div {
-    //box-shadow: inset 0 0 1px 1px rgba(0,0,0,.3);
-  }
-  </style>
+  <script type="text/javascript" src="http://use.typekit.com/pkx1xqg.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
+  <div id="background"></div>
   <header>
 
   </header>
-  <div id="main" role="main" >
-  	<div class="container_12">
+  <div id="main" role="main" class="dark" >
+  	<div class="grid-container">
       <div class="inner-container clearfix">
-        <div class="grid_12">
-          <div id="top-bar"><h1>kate's news</h1></div>
+        <div class="grid-full">
+          <div id="top-bar">
+            <h1>knn news</h1>
+
+          </div>
         </div>
-        <div id="left-container" class="grid_8">
+        <div id="left-container" class="grid-8of12">
           <div id="video-container">
             <video id="video" controls>
               <source src="media/newscast.ogv">
@@ -78,8 +79,8 @@
             <p>The premier appealed to student and union leaders for calm, expressing the hope his new approach would lead to campus peace.</p>
         </div>
         </div>
-        <div id="right-panel" class="grid_4 padleft">
-            <div class="widget now-playing">
+        <div id="right-panel" class="grid-4of12">
+            <div class="widget now-playing detail-b">
               <div class="widget-header">
                 <h3>Now playing <a href="#explore" class="btn btn-right btn-red">Explore</a></h3>
               </div>
@@ -92,14 +93,16 @@
                 <a href="#" class="btn btn-full-width btn-red">Link: asdasda</a>
               </div>
             </div>
-            <div class="widget">
+            <div class="widget detail-t">
               <div class="widget-header">
                 <h3>Coming up</h3>
               </div>
               <ul class="widget-list">
-                <li><a for="#5">Section 1</a></li>
-                <li><a for="#15">Section 2</a></li>
-                <li><a for="#20">Section 3</a></li>
+                <li class="inactive"><a for="#5">This is a wonderful thing</a></li>
+                <li class="inactive"><a for="#5">This is a wonderful thing</a></li>
+                <li class="inactive"><a for="#5">This is a wonderful thing</a></li>
+                <li class="active"><a for="#15">Folders</a></li>
+                <li><a for="#20">Lots to do</a></li>
               </ul>
             </div>
         </div>
@@ -109,7 +112,7 @@
 
 
 <footer>
-  <div class"container_12">
+  <div class"grid-container">
     <p>asdasds</p>
   </div>
 </footer>
@@ -122,14 +125,14 @@ $("a[href='#explore']").toggle(function(){
     $(this).html("video");
     $("#video-container").addClass("tiny");
     $(".bottom-container").animate({
-      height: "500px",
-    });
+      height: "520px",
+    }, 200);
   }, function(e){
     $(this).html("explore");
     $("#video-container").removeClass("tiny");
     $(".bottom-container").animate({
-      height: "145px"
-    });
+      height: "151px"
+    }, 200);
   });
 
   var p = Popcorn("#video");
@@ -137,14 +140,14 @@ $("a[href='#explore']").toggle(function(){
   p.cue(15, function(){
     $("#video-container").addClass("tiny");
     $(".bottom-container").animate({
-      height: "500px"
+      height: "520px"
     });
   });
 
   p.cue(20, function(){
     $("#video-container").removeClass("tiny");
     $(".bottom-container").animate({
-      height: "145px"
+      height: "151px"
     });
   });
 
